@@ -2,10 +2,10 @@ import unittest
 from models import Venda, Livro, Cliente, Vendedor, Fornecedor
 from services import GerenciamentoVendedores, VendaLivros, GerenciamentoFornecedor
 
-# class UnitTest(unittest.TestCase):
+class Test(unittest.TestCase):
 
-#     def test_upper(self):
-#         self.assertEqual('foo'.upper(), 'FOO')
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
 
 class TestVendaLivros(unittest.TestCase):
 
