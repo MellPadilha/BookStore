@@ -1,6 +1,6 @@
 import unittest
-from models import Venda, Livro, Pessoa, Vendedor, Fornecedor
-from services import GerenciamentoVendedores, VendaLivros, GerenciamentoFornecedor
+import Venda, Livro, Cliente, Vendedor, Fornecedor
+import GerenciamentoVendedores, VendaLivros, GerenciamentoFornecedor
 
 class UnitTest(unittest.TestCase):
 
@@ -10,19 +10,18 @@ class UnitTest(unittest.TestCase):
 class TestVendaLivros(unittest.TestCase):
 
     def setUp(self):
-        # Configuração inicial para os testes
         self.venda_livros = VendaLivros()
 
     def test_cadastrarNovaVenda(self):
         codigo_venda = 1
         quantidade = 2
         livro = Livro("Livro A", 10, "Autor A", "Descrição A", 50.0)
-        pessoa = Pessoa("João", "Silva", "joao@example.com", "Rua A", "123456789")
+        cliente = Cliente("João", "Silva", "joao@example.com", "Rua A", "123456789")
         forma_pagamento = "Cartão de Crédito"
         status = "Pendente"
 
         # Chamar o método de cadastro de nova venda
-        self.venda_livros.cadastrarNovaVenda(codigo_venda, quantidade, livro, pessoa, forma_pagamento, status)
+        self.venda_livros.cadastrarNovaVenda(codigo_venda, quantidade, livro, cliente, forma_pagamento, status)
 
         # Verificar se a venda foi cadastrada corretamente
         # Exemplo: Verificar se o atributo código da venda foi definido corretamente
@@ -30,7 +29,7 @@ class TestVendaLivros(unittest.TestCase):
         self.assertEqual(venda.codigo_venda, codigo_venda)
         self.assertEqual(venda.quantidade, quantidade)
         self.assertEqual(venda.livro, livro)
-        self.assertEqual(venda.pessoa, pessoa)
+        self.assertEqual(venda.cliente, cliente)
         self.assertEqual(venda.forma_pagamento, forma_pagamento)
         self.assertEqual(venda.status, status)
 
@@ -39,10 +38,10 @@ class TestVendaLivros(unittest.TestCase):
         codigo_venda = 1
         quantidade = 2
         livro = Livro("Livro A", 10, "Autor A", "Descrição A", 50.0)
-        pessoa = Pessoa("João", "Silva", "joao@example.com", "Rua A", "123456789")
+        cliente = Cliente("João", "Silva", "joao@example.com", "Rua A", "123456789")
         forma_pagamento = "Cartão de Crédito"
         status = "Pendente"
-        venda = Venda(codigo_venda, quantidade, livro, pessoa, forma_pagamento, status)
+        venda = Venda(codigo_venda, quantidade, livro, cliente, forma_pagamento, status)
 
         # Chamar o método de realizar devolução
         novo_status = "Devolvido"
@@ -64,23 +63,24 @@ class TestVendaLivros(unittest.TestCase):
 
 class TestGerenciamentoVendedores(unittest.TestCase):
 
+    def setUp(self):
+        self.gerenciamento = GerenciamentoVendedores()
+
     def test_cadastrarNovoVendedor(self):
-        gerenciamento = GerenciamentoVendedores()
-        gerenciamento.cadastrarNovoVendedor("João", 1, 30, 5000, "Intermediário")
+        self.gerenciamento.cadastrarNovoVendedor("João", 1, 30, 5000, "Intermediário")
         # Verificar se o vendedor foi cadastrado corretamente
 
     def test_pagarComissao(self):
-        gerenciamento = GerenciamentoVendedores()
         # Cadastrar um vendedor com código 1
-        gerenciamento.cadastrarNovoVendedor("João", 1, 30, 5000, "Intermediário")
+        self.gerenciamento.cadastrarNovoVendedor("João", 1, 30, 5000, "Intermediário")
         # Pagar comissão para o vendedor com código 1
-        gerenciamento.pagarComissao(1, 5000)
+        self.gerenciamento.pagarComissao(1, 5000)
         # Verificar se o salário do vendedor foi atualizado corretamente
 
     def test_calcularFerias(self):
-        gerenciamento = GerenciamentoVendedores()
         # Calcular férias com base em um número de vendas
-        tempo_de_ferias = gerenciamento.calcularFerias(100)
+        tempo_de_ferias = self.gerenciamento.calcularFerias(100)
+        print("Tempo de ferias:", tempo_de_ferias)
         # Verificar se o tempo de férias foi calculado corretamente
 
 class TestGerenciamentoFornecedor(unittest.TestCase):
