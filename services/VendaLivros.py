@@ -1,13 +1,17 @@
-from models import Vendedor, Livro, Venda, Cliente
+from models.Venda import Venda
+from models.Livro import Livro
 
 class VendaLivros:
 
-    def cadastrarNovaVenda(self, codigo_venda, quantidade, livro, pessoa, forma_pagamento, status):
-        Venda(codigo_venda, quantidade, livro, pessoa, forma_pagamento, status)
+    @classmethod
+    def cadastrarNovaVenda(self, codigo_venda, quantidade, livro, cliente, forma_pagamento, status):
+        Venda(codigo_venda, quantidade, livro, cliente, forma_pagamento, status)
 
-    def realizerDevolucao(self, status):
+    @classmethod
+    def realizarDevolucao(self, status):
         Venda.mudarStatusLivro(status)
 
-    def vendaComCupom(self, codigo_cupom):
-        Livro.aplicarDesconto(codigo_cupom)
+    @classmethod
+    def vendaComCupom(self, percentual):
+        Livro.aplicarDesconto(percentual)
 

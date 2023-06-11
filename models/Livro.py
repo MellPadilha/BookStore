@@ -15,11 +15,14 @@ class Livro:
         self.descricao = descricao
         self.preco = preco
 
+    @classmethod
     def lancarNovaVersao():
         return True
 
-    def aplicarDesconto(self, pencentual):
-        self.preco_desconto = self.preco / (pencentual / 100)
+    @classmethod
+    def aplicarDesconto(self, percentual):
+        self.preco_desconto = percentual / 100
 
+    @classmethod
     def verificarEstoque(self):
         return self.quantidade

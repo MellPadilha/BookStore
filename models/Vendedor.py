@@ -25,10 +25,12 @@ class Vendedor:
         elif self.experiencia == 'Senior':
             self.salario = 10000
 
-    def calcularComissao(self):
-        comissao = self.numero_de_vendas * 30
+    @classmethod
+    def calcularComissao(self, nm_venda):
+        comissao = nm_venda * 30
         return comissao
     
+    @classmethod
     def promossaoVendedor(self):
          if self.numero_de_vendas > 300:
             self.experiencia = 'Iniciante'
@@ -39,7 +41,7 @@ class Vendedor:
 
          self.alterarSalario()
 
+    @classmethod
     def salarioComComissao(self, salario_mes):
         self.salario = salario_mes
         self.pagamento_mes = True
-        self.alterarSalario()
