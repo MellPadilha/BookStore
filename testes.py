@@ -30,14 +30,6 @@ class TestVendaLivros(unittest.TestCase):
         print("Venda registrada com sucesso!")
 
     def test_realizarDevolucao(self):
-        codigo_venda = 1
-        quantidade = 2
-        livro = Livro("Livro A", 10, "Autor A", "Descrição A", 50.0)
-        cliente = Cliente("João", "Silva", "jão", "09/03/2002", "Rua A", "123456789")
-        forma_pagamento = "Cartão de Crédito"
-        status = "Pendente"
-        venda = Venda(codigo_venda, quantidade, livro, cliente, forma_pagamento, status)
-
         novo_status = "Devolvido"
         self.venda_livros.realizarDevolucao(novo_status)
 
@@ -45,8 +37,6 @@ class TestVendaLivros(unittest.TestCase):
 
     def test_vendaComCupom(self):
         percentual_cupom = 20
-        livro = Livro("Livro A", 10, "Autor A", "Descrição A", 50.0)
-
         self.venda_livros.vendaComCupom(percentual_cupom)
 
         print("Cupom aplicado!")
